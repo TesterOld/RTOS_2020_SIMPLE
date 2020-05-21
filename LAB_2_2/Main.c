@@ -6,20 +6,19 @@
 
 
 
-void delay1(void);
-void delay2(void);
+void delay(int del);
 
 
 int main(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
   // I. Enable PORTC Clock
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	// II. Enable  GPIO_Pin_13 for output push pool Mode
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
 	// III. Your choise 
   //GPIO_SetBits(GPIOC, GPIO_Pin_13); // Set C13 to High level ("1")
   GPIO_ResetBits(GPIOC, GPIO_Pin_13); // Set C13 to Low level ("0")
@@ -28,51 +27,36 @@ int main(void)
    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	// II. Enable  PB0  input 
   /* Configure the GPIO_B  pin 0  for input  */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
+  GPIO_ResetBits(GPIOB, GPIO_Pin_12); // Set C13 to Low level ("0")
    
   while (1) {
-
-	if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0) != 0) {
-    	/* Set PC13*/
-			GPIO_SetBits(GPIOC, GPIO_Pin_13);
-    	delay1();
-    	/* Reset  PC13*/
-    	GPIO_ResetBits(GPIOC, GPIO_Pin_13);
-    	 delay1();
-    }
-    else {
-    	/* Set PC13*/
-			GPIO_SetBits(GPIOC, GPIO_Pin_13);
-    	//GPIOC->ODR ^= GPIO_Pin_13; // Invert C13
-			delay2();
-     	/* Reset  PC13*/
-    	GPIO_ResetBits(GPIOC, GPIO_Pin_13);
-			delay2();
-    	}
+  	delay(10);
+	GPIO_SetBits(GPIOA, GPIO_Pin_5);
+	GPIO_SetBits(GPIOB, GPIO_Pin_12);
+	delay(2);
+    	GPIO_ResetBits(GPIOB, GPIO_Pin_12);
+    	delay(3);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_5);
   }
 }
 
 //-------
 
-
-void delay1(void)
+void delay(int del)
 { 
 	int i;
-	/* delay only first step */
-    	for(i=0;i<0x080000;i++)
-	;
+	int k;
+	for(k=0; k<del; k++)
+	{
+	//1ms delay
+    	for(i=0;i<0x156;i++);
+	}
 }
 
-void delay2(void)
-{
-	 int i;
-	/* delay only first step*/
-    	for(i=0;i<0x200000;i++)
-	;
-}
 
 //---------------------prototipe description---------------------------
 /**
