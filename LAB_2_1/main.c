@@ -21,8 +21,6 @@ int main(void){
 				//APB2ENR register for clock selection
         int *apb2enr = (int*)0x40021018;
         //delay counter variable
-   
-				int i;
   // I. Enable PORTB and PORTA Clock
         *apb2enr|=0x000C;     // Init fast bus 1100 for A and B
   // II. Enable  GPIO_Pin_5 for output push-pool Mode
