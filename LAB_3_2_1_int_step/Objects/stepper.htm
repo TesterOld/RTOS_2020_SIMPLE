@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\stepper.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\stepper.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Mar 24 10:16:26 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu May 28 09:20:38 2020
 <BR><P>
 <H3>Maximum Stack Usage =         48 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; Setup &rArr; GPIO_Init
+__rt_entry_main &rArr; main &rArr; init &rArr; GPIO_Init
 <P>
 <H3>
 Functions with no stack information
@@ -204,7 +204,7 @@ Global Symbols
 
 <P><STRONG><a name="[45]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; Setup &rArr; GPIO_Init
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; init &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -466,48 +466,34 @@ Global Symbols
 
 <P><STRONG><a name="[85]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[52]"></a>GPIO_Init</STRONG> (Thumb, 278 bytes, Stack size 24 bytes, stm32f10x_gpio.o(i.GPIO_Init))
+<P><STRONG><a name="[56]"></a>GPIO_Init</STRONG> (Thumb, 278 bytes, Stack size 24 bytes, stm32f10x_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
 <P><STRONG><a name="[86]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[5a]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ResetBits))
+<P><STRONG><a name="[52]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ResetBits))
 <BR><BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[5b]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_SetBits))
+<P><STRONG><a name="[53]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_SetBits))
 <BR><BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[55]"></a>NVIC_Init</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, misc.o(i.NVIC_Init))
+<P><STRONG><a name="[59]"></a>NVIC_Init</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, misc.o(i.NVIC_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = NVIC_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[53]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<P><STRONG><a name="[57]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[51]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
-</UL>
-
-<P><STRONG><a name="[50]"></a>Setup</STRONG> (Thumb, 128 bytes, Stack size 24 bytes, main.o(i.Setup))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Setup &rArr; GPIO_Init
-</UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
-<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
-<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-</UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[55]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
 <P><STRONG><a name="[38]"></a>SystemInit</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SystemInit))
@@ -517,42 +503,56 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(.text)
 </UL>
-<P><STRONG><a name="[29]"></a>TIM2_IRQHandler</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, main.o(i.TIM2_IRQHandler))
+<P><STRONG><a name="[29]"></a>TIM2_IRQHandler</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, main.o(i.TIM2_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TIM2_IRQHandler &rArr; TIM_GetITStatus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[59]"></a>TIM_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_ClearITPendingBit))
+<P><STRONG><a name="[51]"></a>TIM_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_ClearITPendingBit))
 <BR><BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[57]"></a>TIM_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<P><STRONG><a name="[5b]"></a>TIM_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[58]"></a>TIM_GetITStatus</STRONG> (Thumb, 34 bytes, Stack size 12 bytes, stm32f10x_tim.o(i.TIM_GetITStatus))
+<P><STRONG><a name="[50]"></a>TIM_GetITStatus</STRONG> (Thumb, 34 bytes, Stack size 12 bytes, stm32f10x_tim.o(i.TIM_GetITStatus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = TIM_GetITStatus
 </UL>
 <BR>[Called By]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[56]"></a>TIM_ITConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_ITConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<P><STRONG><a name="[5a]"></a>TIM_ITConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_ITConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[54]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 122 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_TimeBaseInit))
-<BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<P><STRONG><a name="[58]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 122 bytes, Stack size 0 bytes, stm32f10x_tim.o(i.TIM_TimeBaseInit))
+<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
+</UL>
+
+<P><STRONG><a name="[54]"></a>init</STRONG> (Thumb, 126 bytes, Stack size 24 bytes, main.o(i.init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = init &rArr; GPIO_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = main &rArr; Setup &rArr; GPIO_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = main &rArr; init &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Setup
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
