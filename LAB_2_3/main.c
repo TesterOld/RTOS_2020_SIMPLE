@@ -1,34 +1,49 @@
 #include "stm32f10x.h"
-#define POW_SLOW      1000000 //
-#define POW_FAST      100000
+#define T      10 //
+#define TauB      2
+#define TauA      2
 // It is for B0 output blink 
 /**
   * @brief  delay
   * @param  int delay is relativly delay 
   * @retval The input port pin value.
   */
-void delay_(int i);
+void delay(int del);
 
 int main(void){ 
       // I. Enable PORTB Clock    
-      RCC -> APB2ENR |= RCC_APB2ENR_IOPBEN;
+	RCC -> APB2ENR |= RCC_APB2ENR_IOPBEN;
+	RCC -> APB2ENR |= RCC_APB2ENR_IOPAEN;
 			// II. Enable  all low port B for output push-pool Mode
-      GPIOB -> CRL &= 0; 
-      GPIOB -> CRL |= GPIO_CRL_MODE; 
-  
+	GPIOB -> CRH &= 0; 
+	GPIOB -> CRH |= GPIO_CRH_MODE; 
+	
+	GPIOA -> CRL &= 0; 
+	GPIOA -> CRL |= GPIO_CRL_MODE; 
+	
+	int w;
+	w = TauA-TauB;
         for(;;){
-               delay_(POW_SLOW); 
-                GPIOB -> ODR |= GPIO_ODR_ODR0;// pin B0 on
-              delay_(POW_SLOW);// this plase control
-                GPIOB -> ODR &= ~(GPIO_ODR_ODR0);// pin B0 off
+		delay(T);
+		GPIOB -> ODR |= GPIO_ODR_ODR12;// pin B12 on
+		GPIOA -> ODR |= GPIO_ODR_ODR5;// pin A5 on
+		
+		delay(TauB);// this plase control
+                GPIOB -> ODR &= ~(GPIO_ODR_ODR12);// pin B12 off
+		delay(w);
+		GPIOB -> ODR &= ~(GPIO_ODR_ODR5);// pin A5 off
               }
     }
 
-void delay_(int del){
-  int i = 0;
-    for(i=0;i<del;i++){
-      ;
-      }
+void delay(int del)
+{ 
+	int i;
+	int k;
+	for(k=0; k<del; k++)
+	{
+	//1ms delay
+    	for(i=0;i<0x156;i++);
+	}
 }
 
 
